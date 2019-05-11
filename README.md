@@ -50,8 +50,7 @@ tickers = coinzo.get_all_tickers()
         "volume": "14396298.29",
         "daily_change": "0.005059",
         "daily_change_percentage": "6.37"
-    },
-    ...
+    }
 }
 ```
 ### Fetch ticker information for BTC-TRY pair
@@ -84,9 +83,7 @@ depth = coinzo.get_order_book(pair="HOT-TRY")
         "price": 0.007704,
         "amount": 112916,
         "count": 1
-    },
-    ...
-    ],
+    }],
     "bids": [{
         "price": 0.0076311,
         "amount": 129139,
@@ -95,9 +92,7 @@ depth = coinzo.get_order_book(pair="HOT-TRY")
         "price": 0.0076246,
         "amount": 78436,
         "count": 1
-    },
-    ...
-    ],
+    }],
     "total": {
         "bid": 350621.63142392,
         "ask": 54458830.79696769
@@ -120,9 +115,7 @@ trades = coinzo.get_latest_trades(pair="HOT-TRY")
     "amount": 27715,
     "side": "SELL",
     "created_at": 1557603378
-},
-...
-]
+}]
 ```
 
 ### Place a market buy order
@@ -193,8 +186,8 @@ order = coinzo.get_order(order_id="123456789012345678")
     "original_amount": 1,
     "executed_amount": 0,
     "remaining_amount": 1,
-    "active": True,
-    "cancelled": False,
+    "active": true,
+    "cancelled": false,
     "updated_at": 1557604055
 }
 ```
@@ -230,9 +223,7 @@ orders = coinzo.get_open_orders()
     "active": true,
     "cancelled": false,
     "updated_at": 1549109505
-},
-...
-]
+}]
 ```
 
 ### Fetch a list of recent fills
