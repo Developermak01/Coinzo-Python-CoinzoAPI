@@ -1,12 +1,11 @@
+# python-coinzo 0.1.0
+
 [![PyPI version](https://img.shields.io/pypi/v/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![License](https://img.shields.io/pypi/l/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![Travis CI](https://img.shields.io/travis/tolgamorf/python-coinzo.svg)](https://travis-ci.org/tolgamorf/python-coinzo)
 [![Coverage Status](https://coveralls.io/repos/github/tolgamorf/python-coinzo/badge.svg)](https://coveralls.io/github/tolgamorf/python-coinzo)
 [![Wheel](https://img.shields.io/pypi/wheel/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![Python requirement](https://img.shields.io/pypi/pyversions/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
-
-
-# python-coinzo 0.1.0
 
 python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coinzo.com). It requires Python 3.6+
 
