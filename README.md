@@ -1,12 +1,12 @@
 # python-coinzo
 
 [![PyPI version](https://img.shields.io/pypi/v/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
-[![License](https://img.shields.io/pypi/l/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
+[![License](https://img.shields.io/pypi/l/python-coinzo.svg)](LICENSE)
 [![Travis CI](https://img.shields.io/travis/tolgamorf/python-coinzo.svg)](https://travis-ci.org/tolgamorf/python-coinzo)
 [![Wheel](https://img.shields.io/pypi/wheel/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![Python requirement](https://img.shields.io/pypi/pyversions/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 
-python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coinzo.com). It requires Python 3.6+
+python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coinzo.com). It requires Python 3.6+.
 
 ---
 
@@ -18,9 +18,9 @@ python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coin
 
 ## Quick Start
 
-* Register an account with [coinzo](https://www.coinzo.com/?ref=397461825936130049).
-* [Generate an API Key](https://www.coinzo.com/account/api) and assign relevant permissions.
-* Install the python package using the following command.
+1. Register an account with [coinzo](https://www.coinzo.com/?ref=397461825936130049).
+2. [Generate an API Key](https://www.coinzo.com/account/api) and assign relevant permissions.
+3. Install the python package using the following command.
 
 ```bash
 pip install python-coinzo
@@ -63,7 +63,7 @@ tickers = coinzo.get_all_tickers()
     }
 }
 ```
-### Fetch ticker information for BTC-TRY pair
+### Fetch ticker information for a pair
 ```python
 ticker = coinzo.get_ticker("BTC-TRY")
 ```
@@ -79,7 +79,7 @@ ticker = coinzo.get_ticker("BTC-TRY")
     }
 }
 ```
-### Fetch market depth (order book info) for HOT-TRY pair
+### Fetch market depth (order book info) for a pair
 ```python
 depth = coinzo.get_order_book(pair="HOT-TRY")
 ```
