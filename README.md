@@ -261,7 +261,7 @@ The arguments `limit` and `page` are optional.
 * Defaults values: `limit=100`, `page=1`.
 
 ```python
-fills = coinzo.get_fills()
+fills = coinzo.get_fills(limit=2, page=1)
 ```
 ```json
 [{
