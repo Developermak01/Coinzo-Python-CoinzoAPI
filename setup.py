@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python-coinzo",
-    version="0.1.1",
+    version="0.1.2",
     author="tolgamorf",
     author_email="cryptolga@gmail.com",
     description="coinzo REST API python implementation",
@@ -25,5 +25,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
-    keywords="coinzo exchange rest api bitcoin ethereum btc eth neo eos xrp hot",
+    keywords="coinzo exchange rest api bitcoin ethereum btc eth neo eos xrp hot try",
 )
