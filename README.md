@@ -6,12 +6,7 @@
 [![Python requirement](https://img.shields.io/pypi/pyversions/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 
 
-
-.. image:: https://img.shields.io/travis/tolgamorf/python-coinzo.svg
-    :target: https://travis-ci.org/tolgamorf/python-coinzo
-
-
-# Welcome to python-coinzo 0.1.0
+# python-coinzo 0.1.0
 
 python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coinzo.com). It requires Python 3.6+
 
