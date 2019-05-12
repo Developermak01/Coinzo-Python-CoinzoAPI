@@ -220,6 +220,9 @@ order = coinzo.get_order(order_id="123456789012345678")
 ```
 
 ### Fetch all open orders
+The arguments `limit` and `page` are optional.
+* Defaults values: `limit=100`, `page=1`.
+
 ```python
 orders = coinzo.get_open_orders()
 ```
@@ -254,6 +257,9 @@ orders = coinzo.get_open_orders()
 ```
 
 ### Fetch the list of recent fills
+The arguments `limit` and `page` are optional.
+* Defaults values: `limit=100`, `page=1`.
+
 ```python
 fills = coinzo.get_fills()
 ```
