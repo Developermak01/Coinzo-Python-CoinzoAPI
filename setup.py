@@ -6,8 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python-coinzo",
-    version="0.1.0",
-    # scripts=["dokr"],
+    version="0.1.1",
     author="tolgamorf",
     author_email="cryptolga@gmail.com",
     description="coinzo REST API python implementation",
@@ -15,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/tolgamorf/python-coinzo",
     packages=["coinzo"],  # setuptools.find_packages(),
-    python_requires=">=3.6, <4",
+    python_requires=">=3.6",
     install_requires=["requests"],
     classifiers=[
         "Development Status :: 3 - Alpha",
