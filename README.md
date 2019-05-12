@@ -1,9 +1,8 @@
-# python-coinzo 0.1.0
+# python-coinzo
 
 [![PyPI version](https://img.shields.io/pypi/v/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![License](https://img.shields.io/pypi/l/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![Travis CI](https://img.shields.io/travis/tolgamorf/python-coinzo.svg)](https://travis-ci.org/tolgamorf/python-coinzo)
-[![Coverage Status](https://coveralls.io/repos/github/tolgamorf/python-coinzo/badge.svg)](https://coveralls.io/github/tolgamorf/python-coinzo)
 [![Wheel](https://img.shields.io/pypi/wheel/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 [![Python requirement](https://img.shields.io/pypi/pyversions/python-coinzo.svg)](https://pypi.python.org/pypi/python-coinzo)
 
@@ -27,6 +26,10 @@ python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coin
 pip install python-coinzo
 ```
 
+## To Do List
+* More helper functions
+* Websocket implementation
+* Tests
 
 ## Examples
 
@@ -107,7 +110,7 @@ depth = coinzo.get_order_book(pair="HOT-TRY")
 }
 ```
 
-### Fetch latest trades for HOT-TRY pair
+### Fetch latest trades for a pair
 ```python
 trades = coinzo.get_latest_trades(pair="HOT-TRY")
 ```
@@ -125,9 +128,10 @@ trades = coinzo.get_latest_trades(pair="HOT-TRY")
 }]
 ```
 
-### Place a market buy order
+### Place a market buy/sell order
 ```python
-order = coinzo.place_market_buy_order(pair="NEO-TRY", amount="1")
+buy_order = coinzo.place_market_buy_order(pair="NEO-TRY", amount="1")
+sell_order = coinzo.place_market_sell_order(pair="NEO-TRY", amount="1")
 ```
 ```json
 {
@@ -135,9 +139,14 @@ order = coinzo.place_market_buy_order(pair="NEO-TRY", amount="1")
 }
 ```
 
-### Place a limit buy order
+### Place a limit buy/sell order
 ```python
-order = coinzo.place_limit_buy_order(
+buy_order = coinzo.place_limit_buy_order(
+    pair="NEO-TRY",
+    amount="1",
+    limit_price="50.01",
+)
+sell_order = coinzo.place_limit_sell_order(
     pair="NEO-TRY",
     amount="1",
     limit_price="50.01",
@@ -149,9 +158,14 @@ order = coinzo.place_limit_buy_order(
 }
 ```
 
-### Place a stop market buy order
+### Place a stop market buy/sell order
 ```python
-order = coinzo.place_stop_market_buy_order(
+buy_order = coinzo.place_stop_market_buy_order(
+    pair="NEO-TRY",
+    amount="1",
+    stop_price="59.99",
+)
+sell_order = coinzo.place_stop_market_sell_order(
     pair="NEO-TRY",
     amount="1",
     stop_price="59.99",
@@ -163,9 +177,15 @@ order = coinzo.place_stop_market_buy_order(
 }
 ```
 
-### Place a stop limit buy order
+### Place a stop limit buy/sell order
 ```python
-order = coinzo.place_stop_limit_buy_order(
+buy_order = coinzo.place_stop_limit_buy_order(
+    pair="NEO-TRY",
+    amount="1",
+    limit_price="50.01",
+    stop_price="50.99",
+)
+sell_order = coinzo.place_stop_limit_sell_order(
     pair="NEO-TRY",
     amount="1",
     limit_price="50.01",
@@ -233,7 +253,7 @@ orders = coinzo.get_open_orders()
 }]
 ```
 
-### Fetch a list of recent fills
+### Fetch the list of recent fills
 ```python
 fills = coinzo.get_fills()
 ```
@@ -283,7 +303,7 @@ coinzo.cancel_all_orders()
 true
 ```
 
-### Fetch a deposit address for BTC
+### Fetch the deposit address for a coin
 ```python
 address = coinzo.get_deposit_address(asset="BTC")
 ```
@@ -294,9 +314,9 @@ address = coinzo.get_deposit_address(asset="BTC")
 }
 ```
 
-### Fetch list of deposits
-
-`limit` and `page` are optional, defaults: limit=100, page=1
+### Fetch the list of your deposits
+The arguments `limit` and `page` are optional.
+* Defaults values: `limit=100`, `page=1`.
 
 ```python
 deposits = coinzo.get_deposit_history(limit=2, page=2)
@@ -323,7 +343,11 @@ deposits = coinzo.get_deposit_history(limit=2, page=2)
 }]
 ```
 
-### Withdraw 10 EOS
+### Withdraw a coin
+The arguments `tag` and `memo` are optional.
+* `tag`: Destination tag for XRP withdrawals.
+* `memo`: Memo for EOS withdrawals.
+
 ```python
 coinzo.withdraw(
     asset="EOS",
@@ -340,9 +364,9 @@ coinzo.withdraw(
 }
 ```
 
-### Fetch list of withdrawals
-
-`limit` and `page` are optional, defaults: limit=100, page=1
+### Fetch the list of your withdrawals
+The arguments `limit` and `page` are optional.
+* Defaults values: `limit=100`, `page=1`.
 
 ```python
 withdrawals = coinzo.get_withdrawal_history(limit=1, page=3)
