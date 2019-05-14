@@ -144,12 +144,12 @@ sell_order = coinzo.place_market_sell_order(pair="NEO-TRY", amount="1")
 buy_order = coinzo.place_limit_buy_order(
     pair="NEO-TRY",
     amount="1",
-    limit_price="50.01",
+    limit_price="49.99",
 )
 sell_order = coinzo.place_limit_sell_order(
     pair="NEO-TRY",
     amount="1",
-    limit_price="50.01",
+    limit_price="60.01",
 )
 ```
 ```json
@@ -163,12 +163,12 @@ sell_order = coinzo.place_limit_sell_order(
 buy_order = coinzo.place_stop_market_buy_order(
     pair="NEO-TRY",
     amount="1",
-    stop_price="59.99",
+    stop_price="55.01",
 )
 sell_order = coinzo.place_stop_market_sell_order(
     pair="NEO-TRY",
     amount="1",
-    stop_price="59.99",
+    stop_price="49.99",
 )
 ```
 ```json
@@ -182,14 +182,14 @@ sell_order = coinzo.place_stop_market_sell_order(
 buy_order = coinzo.place_stop_limit_buy_order(
     pair="NEO-TRY",
     amount="1",
-    limit_price="50.01",
-    stop_price="50.99",
+    limit_price="54.99",
+    stop_price="55.01",
 )
 sell_order = coinzo.place_stop_limit_sell_order(
     pair="NEO-TRY",
     amount="1",
     limit_price="50.01",
-    stop_price="50.99",
+    stop_price="49.99",
 )
 ```
 ```json
