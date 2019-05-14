@@ -12,7 +12,7 @@ def test_invalid_json():
     with pytest.raises(BadResponse):
         with requests_mock.mock() as m:
             m.get("https://api.coinzo.com/tickers", text="<head></html>")
-            coinzo.get_all_tickers()
+            coinzo.all_tickers()
 
 
 def test_api_exception():
@@ -26,7 +26,7 @@ def test_api_exception():
                 json=json_obj,
                 status_code=400,
             )
-            coinzo.get_ticker("BTC-TRY")
+            coinzo.ticker("BTC-TRY")
 
 
 def test_api_exception_invalid_json():
@@ -40,7 +40,7 @@ def test_api_exception_invalid_json():
                 text=not_json_str,
                 status_code=400,
             )
-            coinzo.get_ticker("BTC-TRY")
+            coinzo.ticker("BTC-TRY")
 
 
 # def test_withdraw_api_exception():
