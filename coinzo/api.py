@@ -108,7 +108,7 @@ class coinzo:
     ###########################################################################
     #   PRIVATE API > USER INFO >>> Permissions: Info
     ###########################################################################
-    def get_account_info(self):
+    def account_info(self):
         """
         Get account information.
 
@@ -119,7 +119,7 @@ class coinzo:
 
         return self._get_request(path)
 
-    def get_balances(self):
+    def balances(self):
         """
         Get account balances.
 
@@ -133,7 +133,7 @@ class coinzo:
     ###########################################################################
     #   PRIVATE API > ORDERS >>> Permissions: Info + (Trade)
     ###########################################################################
-    def get_open_orders(self, limit=100, page=1):
+    def open_orders(self, limit=100, page=1):
         """
         List your current open orders. Only open or un-settled
         orders are returned. As soon as an order is no longer open
@@ -147,7 +147,7 @@ class coinzo:
 
         return self._get_request(path, data)
 
-    def get_order(self, order_id):
+    def order(self, order_id):
         """
         Get information about a given order.
 
@@ -321,7 +321,7 @@ class coinzo:
 
         return self._delete_request(path)
 
-    def get_fills(self, limit=100, page=1):
+    def fills(self, limit=100, page=1):
         """
         Get the list of recent fills.
 
@@ -336,7 +336,7 @@ class coinzo:
     ###########################################################################
     #   PRIVATE API > DEPOSIT/WITHDRAWAL >>> Permissions: Info + (Withdrawal)
     ###########################################################################
-    def get_deposit_address(self, asset):
+    def deposit_address(self, asset):
         """
         Get the deposit address for an asset.
 
@@ -348,7 +348,7 @@ class coinzo:
 
         return self._get_request(path, data)
 
-    def get_deposit_history(self, limit=100, page=1):
+    def deposit_history(self, limit=100, page=1):
         """
         Get your deposit history.
 
@@ -380,7 +380,7 @@ class coinzo:
 
         return self._post_request(path, data)
 
-    def get_withdrawal_history(self, limit=100, page=1):
+    def withdrawal_history(self, limit=100, page=1):
         """
         Get your withdrawal history.
 
@@ -395,7 +395,7 @@ class coinzo:
     ###########################################################################
     #   PUBLIC API >>> No permissions needed
     ###########################################################################
-    def get_all_tickers(self):
+    def all_tickers(self):
         """
         Get the list tickers for all trading pairs.
         Snapshot information about the last trade (tick),
@@ -408,7 +408,7 @@ class coinzo:
 
         return self._get_request(path)
 
-    def get_ticker(self, pair):
+    def ticker(self, pair):
         """
         Get the ticker for a pair.
         Snapshot information about the last trade (tick),
@@ -422,7 +422,7 @@ class coinzo:
 
         return self._get_request(path, params=params)
 
-    def get_order_book(self, pair):
+    def order_book(self, pair):
         """
         Get the order book for a pair.
 
@@ -434,7 +434,7 @@ class coinzo:
 
         return self._get_request(path, params=params)
 
-    def get_latest_trades(self, pair):
+    def latest_trades(self, pair):
         """
         Get the latest trades for a pair
 
