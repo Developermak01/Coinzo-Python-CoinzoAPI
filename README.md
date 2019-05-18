@@ -19,7 +19,7 @@ python-coinzo is a simple Python wrapper for [coinzo REST API](https://docs.coin
 ## Quick Start
 
 1. Register an account with [coinzo](https://www.coinzo.com/?ref=397461825936130049).
-2. [Generate an API Key](https://www.coinzo.com/account/api) and assign relevant permissions.
+2. [Generate an API key](https://www.coinzo.com/account/api) and assign relevant permissions.
 3. Install the python package using the following command.
 
 ```bash
@@ -41,7 +41,7 @@ coinzo = coinzo("<your_api_key>", "<your_api_secret>")
 
 ### Fetch ticker information for all trading pairs
 ```python
-tickers = coinzo.get_all_tickers()
+tickers = coinzo.all_tickers()
 ```
 ```json
 {
@@ -65,7 +65,7 @@ tickers = coinzo.get_all_tickers()
 ```
 ### Fetch ticker information for a pair
 ```python
-ticker = coinzo.get_ticker("BTC-TRY")
+ticker = coinzo.ticker("BTC-TRY")
 ```
 ```json
 {
@@ -81,7 +81,7 @@ ticker = coinzo.get_ticker("BTC-TRY")
 ```
 ### Fetch market depth (order book info) for a pair
 ```python
-depth = coinzo.get_order_book(pair="HOT-TRY")
+depth = coinzo.order_book(pair="HOT-TRY")
 ```
 ```json
 {
@@ -112,7 +112,7 @@ depth = coinzo.get_order_book(pair="HOT-TRY")
 
 ### Fetch latest trades for a pair
 ```python
-trades = coinzo.get_latest_trades(pair="HOT-TRY")
+trades = coinzo.latest_trades(pair="HOT-TRY")
 ```
 ```json
 [{
@@ -200,7 +200,7 @@ sell_order = coinzo.place_stop_limit_sell_order(
 
 ### Fetch an order
 ```python
-order = coinzo.get_order(order_id="123456789012345678")
+order = coinzo.order(order_id="123456789012345678")
 ```
 ```json
 {
@@ -224,7 +224,7 @@ The arguments `limit` and `page` are optional.
 * Defaults values: `limit=100`, `page=1`.
 
 ```python
-orders = coinzo.get_open_orders()
+orders = coinzo.open_orders()
 ```
 ```json
 [{
@@ -261,7 +261,7 @@ The arguments `limit` and `page` are optional.
 * Defaults values: `limit=100`, `page=1`.
 
 ```python
-fills = coinzo.get_fills(limit=2, page=1)
+fills = coinzo.fills(limit=2, page=1)
 ```
 ```json
 [{
@@ -311,7 +311,7 @@ true
 
 ### Fetch the deposit address for a coin
 ```python
-address = coinzo.get_deposit_address(asset="BTC")
+address = coinzo.deposit_address(asset="BTC")
 ```
 ```json
 {
@@ -325,7 +325,7 @@ The arguments `limit` and `page` are optional.
 * Defaults values: `limit=100`, `page=1`.
 
 ```python
-deposits = coinzo.get_deposit_history(limit=2, page=2)
+deposits = coinzo.deposit_history(limit=2, page=2)
 ```
 ```json
 [{
@@ -375,7 +375,7 @@ The arguments `limit` and `page` are optional.
 * Defaults values: `limit=100`, `page=1`.
 
 ```python
-withdrawals = coinzo.get_withdrawal_history(limit=1, page=3)
+withdrawals = coinzo.withdrawal_history(limit=1, page=3)
 ```
 ```json
 [
