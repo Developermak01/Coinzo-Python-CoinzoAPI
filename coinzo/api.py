@@ -5,7 +5,7 @@ import hmac
 import base64
 import json
 import requests
-from time import time
+from time import time, sleep
 from http import HTTPStatus
 from urllib.parse import urljoin
 
@@ -166,7 +166,7 @@ class coinzo:
         https://docs.coinzo.com/#place-a-new-order
         """
         logging.info(
-            f"Creating {type} order for {pair} {amount}@{limit_price} ({stop_price})..."
+            f"Creating {type} {side} order for {pair} {amount}@{limit_price} ({stop_price})..."
         )
         path = "/order/new"
         data = {
@@ -181,6 +181,20 @@ class coinzo:
             data.update({"stopPrice": stop_price})
 
         return self._post_request(path, data)
+
+    def place_limit_order(self, pair, side, amount, limit_price):
+        """
+        Place a limit order.
+
+        https://docs.coinzo.com/#place-a-new-order
+        """
+        return self._place_order(
+            pair=pair,
+            type=self.ORDER_TYPE_LIMIT,
+            side=side,
+            amount=amount,
+            limit_price=limit_price,
+        )
 
     def place_limit_buy_order(self, pair, amount, limit_price):
         """
@@ -445,3 +459,95 @@ class coinzo:
         params = {"pair": pair}
 
         return self._get_request(path, params=params)
+
+    ###########################################################################
+    #   HELPER FUNCTIONS
+    ###########################################################################
+    def best_orders(self, pair):
+        """
+        Get the best ask and bid orders for a pair
+        """
+        logging.info(f"Getting the best ask and bid orders for {pair}...")
+        order_book = self.order_book(pair)
+        best_ask_order = order_book["asks"][0]
+        best_bid_order = order_book["bids"][0]
+
+        return {
+            "ask_price": best_ask_order["price"],
+            "ask_amount": best_ask_order["amount"],
+            "bid_price": best_bid_order["price"],
+            "bid_amount": best_bid_order["amount"],
+        }
+
+    def best_ask_order(self, pair):
+        """
+        Get the best ask order for a pair
+        """
+        logging.info(f"Getting the best ask order for {pair}...")
+
+        return self.best_orders(pair)["ask"]
+
+    def best_bid_order(self, pair):
+        """
+        Get the best bid order for a pair
+        """
+        logging.info(f"Getting the best bid order for {pair}...")
+
+        return self.best_orders(pair)["bid"]
+
+    def best_prices(self, pair):
+        """
+        Get the best ask and bid prices for a pair
+        """
+        logging.info(f"Getting the best ask and bid prices for {pair}...")
+        best_orders = self.best_orders(pair)
+
+        return {"ask": best_orders["ask"]["price"], "bid": best_orders["bid"]["price"]}
+
+    def best_ask_price(self, pair):
+        """
+        Get the best ask price for a pair
+        """
+        logging.info(f"Getting the best ask price for {pair}...")
+
+        return self.best_prices(pair)["ask"]
+
+    def best_bid_price(self, pair):
+        """
+        Get the best bid price for a pair
+        """
+        logging.info(f"Getting the best bid price for {pair}...")
+
+        return self.best_prices(pair)["bid"]
+
+    def pairs_list(self):
+        """
+        Get the list of all pairs
+        """
+        logging.info(f"Getting the list of pairs...")
+
+        return list(self.all_tickers().keys())
+
+    def best_orders_for_all_pairs(self):
+        """
+        Get the list of the best orders for all pairs
+        """
+        logging.info(f"Getting the list of the best orders for all pairs...")
+        pairs = self.pairs_list()
+
+        best_orders = {}
+
+        for pair in pairs:
+            best_orders[pair] = self.best_orders(pair)
+            sleep(0.35)  # for rate limit
+
+        return best_orders
+
+    def order_is_filled(self, order_id):
+        """
+        Get information about a given order.
+        """
+        logging.info(f"Checking if order with id {order_id} is filled...")
+        order = self.order(order_id)
+
+        return order["active"]
