@@ -550,4 +550,4 @@ class coinzo:
         logging.info(f"Checking if order with id {order_id} is filled...")
         order = self.order(order_id)
 
-        return order["active"]
+        return not order["active"]
