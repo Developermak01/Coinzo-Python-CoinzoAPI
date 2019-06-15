@@ -9,6 +9,9 @@ from time import time, sleep
 from http import HTTPStatus
 from urllib.parse import urljoin
 
+# Logger config
+log = logging.getLogger(__name__)
+
 
 class coinzo:
     API_ENDPOINT = "https://api.coinzo.com"
@@ -57,7 +60,7 @@ class coinzo:
             otherwise:
                 [bool] -- [True for successful requests]
         """
-        logging.info("Making a request...")
+        log.info("Making a request...")
 
         url = urljoin(self.API_ENDPOINT, path)
         payload = self._generate_payload(data)
@@ -114,7 +117,7 @@ class coinzo:
 
         https://docs.coinzo.com/#usage
         """
-        logging.info(f"Getting user info...")
+        log.info(f"Getting user info...")
         path = "/usage"
 
         return self._get_request(path)
@@ -125,7 +128,7 @@ class coinzo:
 
         https://docs.coinzo.com/#balances
         """
-        logging.info(f"Getting account balances...")
+        log.info(f"Getting account balances...")
         path = "/balances"
 
         return self._get_request(path)
@@ -141,7 +144,7 @@ class coinzo:
 
         https://docs.coinzo.com/#list-orders
         """
-        logging.info(f"Getting all open orders...")
+        log.info(f"Getting all open orders...")
         path = "/orders"
         data = {"limit": limit, "page": page}
 
@@ -153,7 +156,7 @@ class coinzo:
 
         https://docs.coinzo.com/#get-order-status
         """
-        logging.info(f"Getting order with id {order_id}...")
+        log.info(f"Getting order #{order_id}...")
         path = "/order"
         data = {"id": order_id}
 
@@ -165,7 +168,7 @@ class coinzo:
 
         https://docs.coinzo.com/#place-a-new-order
         """
-        logging.info(
+        log.warning(
             f"Creating {type} {side} order for {pair} {amount}@{limit_price} ({stop_price})..."
         )
         path = "/order/new"
@@ -318,7 +321,7 @@ class coinzo:
 
         https://docs.coinzo.com/#cancel-an-order
         """
-        logging.info(f"Cancelling order {order_id}...")
+        log.warning(f"Cancelling order #{order_id}...")
         path = "/order"
         data = {"id": order_id}
 
@@ -330,7 +333,7 @@ class coinzo:
 
         https://docs.coinzo.com/#cancel-all-orders
         """
-        logging.info(f"Cancelling all open orders...")
+        log.info(f"Cancelling all open orders...")
         path = "/orders"
 
         return self._delete_request(path)
@@ -341,7 +344,7 @@ class coinzo:
 
         https://docs.coinzo.com/#fills
         """
-        logging.info(f"Getting recent fills...")
+        log.info(f"Getting recent fills...")
         path = "/fills"
         data = {"limit": limit, "page": page}
 
@@ -356,7 +359,7 @@ class coinzo:
 
         https://docs.coinzo.com/#show-deposit-address
         """
-        logging.info(f"Getting deposit address for {asset}...")
+        log.info(f"Getting deposit address for {asset}...")
         path = "/deposit/address"
         data = {"asset": asset}
 
@@ -368,7 +371,7 @@ class coinzo:
 
         https://docs.coinzo.com/#list-deposits
         """
-        logging.info(f"Getting deposit history...")
+        log.info(f"Getting deposit history...")
         path = "/deposit/list"
         data = {"limit": limit, "page": page}
 
@@ -380,7 +383,7 @@ class coinzo:
 
         https://docs.coinzo.com/#new-withdraw
         """
-        logging.info(
+        log.info(
             f"Creating withdrawal request of {amount} {asset} to {address} ({tag}{memo})..."
         )
         path = "/withdraw"
@@ -400,7 +403,7 @@ class coinzo:
 
         https://docs.coinzo.com/#list-withdrawals
         """
-        logging.info(f"Getting withdrawal history...")
+        log.info(f"Getting withdrawal history...")
         path = "/withdraw/list"
         data = {"limit": limit, "page": page}
 
@@ -417,7 +420,7 @@ class coinzo:
 
         https://docs.coinzo.com/#ticker
         """
-        logging.info(f"Getting all tickers...")
+        log.info(f"Getting all tickers...")
         path = "/tickers"
 
         return self._get_request(path)
@@ -430,7 +433,7 @@ class coinzo:
 
         https://docs.coinzo.com/#ticker
         """
-        logging.info(f"Getting ticker for {pair}...")
+        log.info(f"Getting ticker for {pair}...")
         path = "/ticker"
         params = {"pair": pair}
 
@@ -442,7 +445,7 @@ class coinzo:
 
         https://docs.coinzo.com/#order-book
         """
-        logging.info(f"Getting order book for {pair}...")
+        log.info(f"Getting order book for {pair}...")
         path = "/order-book"
         params = {"pair": pair}
 
@@ -454,7 +457,7 @@ class coinzo:
 
         https://docs.coinzo.com/#trades
         """
-        logging.info(f"Getting recent trades for {pair}...")
+        log.info(f"Getting recent trades for {pair}...")
         path = "/trades"
         params = {"pair": pair}
 
@@ -467,7 +470,7 @@ class coinzo:
         """
         Get the best ask and bid orders for a pair
         """
-        logging.info(f"Getting the best ask and bid orders for {pair}...")
+        log.info(f"Getting the best ask and bid orders for {pair}...")
         order_book = self.order_book(pair)
         if not len(order_book.get("asks")) or not len(order_book.get("bids")):
             return None
@@ -486,7 +489,7 @@ class coinzo:
         """
         Get the best ask order for a pair
         """
-        logging.info(f"Getting the best ask order for {pair}...")
+        log.info(f"Getting the best ask order for {pair}...")
         best_orders = self.best_orders(pair)
 
         return {
@@ -498,7 +501,8 @@ class coinzo:
         """
         Get the best bid order for a pair
         """
-        logging.info(f"Getting the best bid order for {pair}...")
+        log.info(f"Getting the best bid order for {pair}...")
+        best_orders = self.best_orders(pair)
 
         return {
             "price": best_orders.get("bid_price", 0),
@@ -509,7 +513,7 @@ class coinzo:
         """
         Get the best ask and bid prices for a pair
         """
-        logging.info(f"Getting the best ask and bid prices for {pair}...")
+        log.info(f"Getting the best ask and bid prices for {pair}...")
         best_orders = self.best_orders(pair)
 
         return {
@@ -521,15 +525,15 @@ class coinzo:
         """
         Get the best ask price for a pair
         """
-        logging.info(f"Getting the best ask price for {pair}...")
+        log.info(f"Getting the best ask price for {pair}...")
 
-        return self.best_prices(pair)["ask"]
+        return self.best_prices(pair).get("ask_price", 0)
 
     def best_bid_price(self, pair):
         """
         Get the best bid price for a pair
         """
-        logging.info(f"Getting the best bid price for {pair}...")
+        log.info(f"Getting the best bid price for {pair}...")
 
         return self.best_prices(pair).get("bid_price", 0)
 
@@ -537,7 +541,7 @@ class coinzo:
         """
         Get the list of all pairs
         """
-        logging.info(f"Getting the list of pairs...")
+        log.info(f"Getting the list of pairs...")
 
         return list(self.all_tickers().keys())
 
@@ -545,7 +549,7 @@ class coinzo:
         """
         Get the list of the best orders for all pairs
         """
-        logging.info(f"Getting the list of the best orders for all pairs...")
+        log.info(f"Getting the list of the best orders for all pairs...")
         pairs = self.pairs_list()
 
         best_orders = {}
@@ -560,7 +564,7 @@ class coinzo:
         """
         Get information about a given order.
         """
-        logging.info(f"Checking if order with id {order_id} is filled...")
+        log.info(f"Checking if order #{order_id} is filled...")
         order = self.order(order_id)
 
         return not order.get("active")
