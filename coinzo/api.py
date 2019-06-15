@@ -469,14 +469,17 @@ class coinzo:
         """
         logging.info(f"Getting the best ask and bid orders for {pair}...")
         order_book = self.order_book(pair)
-        best_ask_order = order_book["asks"][0]
-        best_bid_order = order_book["bids"][0]
+        if not len(order_book.get("asks")) or not len(order_book.get("bids")):
+            return None
+
+        best_ask_order = order_book.get("asks")[0]
+        best_bid_order = order_book.get("bids")[0]
 
         return {
-            "ask_price": best_ask_order["price"],
-            "ask_amount": best_ask_order["amount"],
-            "bid_price": best_bid_order["price"],
-            "bid_amount": best_bid_order["amount"],
+            "ask_price": best_ask_order.get("price", 0),
+            "ask_amount": best_ask_order.get("amount", 0),
+            "bid_price": best_bid_order.get("price", 0),
+            "bid_amount": best_bid_order.get("amount", 0),
         }
 
     def best_ask_order(self, pair):
@@ -484,8 +487,12 @@ class coinzo:
         Get the best ask order for a pair
         """
         logging.info(f"Getting the best ask order for {pair}...")
+        best_orders = self.best_orders(pair)
 
-        return self.best_orders(pair)["ask"]
+        return {
+            "price": best_orders.get("ask_price", 0),
+            "amount": best_orders.get("ask_amount", 0),
+        }
 
     def best_bid_order(self, pair):
         """
@@ -493,7 +500,10 @@ class coinzo:
         """
         logging.info(f"Getting the best bid order for {pair}...")
 
-        return self.best_orders(pair)["bid"]
+        return {
+            "price": best_orders.get("bid_price", 0),
+            "amount": best_orders.get("bid_amount", 0),
+        }
 
     def best_prices(self, pair):
         """
@@ -502,7 +512,10 @@ class coinzo:
         logging.info(f"Getting the best ask and bid prices for {pair}...")
         best_orders = self.best_orders(pair)
 
-        return {"ask": best_orders["ask"]["price"], "bid": best_orders["bid"]["price"]}
+        return {
+            "ask": best_orders.get("ask_price", 0),
+            "bid": best_orders.get("bid_price", 0),
+        }
 
     def best_ask_price(self, pair):
         """
@@ -518,7 +531,7 @@ class coinzo:
         """
         logging.info(f"Getting the best bid price for {pair}...")
 
-        return self.best_prices(pair)["bid"]
+        return self.best_prices(pair).get("bid_price", 0)
 
     def pairs_list(self):
         """
@@ -550,4 +563,4 @@ class coinzo:
         logging.info(f"Checking if order with id {order_id} is filled...")
         order = self.order(order_id)
 
-        return not order["active"]
+        return not order.get("active")
