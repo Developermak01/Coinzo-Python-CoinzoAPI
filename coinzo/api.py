@@ -112,7 +112,7 @@ class coinzo:
         """
         Get account information.
 
-        https://docs.coinzo.com/#fills
+        https://docs.coinzo.com/#usage
         """
         logging.info(f"Getting user info...")
         path = "/usage"
