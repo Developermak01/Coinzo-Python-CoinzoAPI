@@ -257,6 +257,20 @@ class coinzo:
             stop_price=stop_price,
         )
 
+    def place_market_order(self, pair, side, amount):
+        """
+        Place a market order.
+
+        https://docs.coinzo.com/#place-a-new-order
+        """
+        return self._place_order(
+            pair=pair,
+            type=self.ORDER_TYPE_MARKET,
+            side=side,
+            amount=amount,
+            limit_price="0",
+        )
+
     def place_market_buy_order(self, pair, amount):
         """
         Place a market buy order.
